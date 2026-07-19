@@ -1,0 +1,214 @@
+
+
+===== CHUNK 1 =====
+--- Page 1 ---
+C++ Programlama Dili
+
+--- Page 2 ---
+Nesneye Dayalı Programların 
+Unsurları 
+
+
+--- Page 3 ---
+Nesnelerle İlgili Temel 
+Özellikler
+
+
+--- Page 4 ---
+C++ Programlarının Yapısı
+Temel Bileşenler
+• Açıklama satırları
+• (// veya /* */)
+• #include direktifleri
+• using namespace std;
+• main() fonksiyonu
+• Deyimler ve bloklar
+Örnek Program Yapısı
+#include <iostream>
+using namespace std;
+int main() {
+cout << "Merhaba Dünya!"; 
+return 0;
+}
+* https://www.tiobe.com/tiobe-index/
+
+===== CHUNK 2 =====
+--- Page 5 ---
+Fonksiyonlar
+Fonksiyonlar tekrar kullanılabilir kod bloklarıdır.
+Parametre alabilir ve değer döndürebilir.
+Fonksiyon prototipi bildirilebilir.
+int kare(int x){ return x*x; }
+int main(){
+cout << kare(5); // 25
+}
+
+===== CHUNK 3 =====
+--- Page 6 ---
+C++ Ön işlemcisi
+C++ programları kendi derleyicisi ile de ilişki halinde olacaktır.
+Bu ilişki C++ ön işlemcisi yardımıyla sağlanır.
+Ön işlemciler çeşitli emirlerden oluşabilir.
+Bu emirler C++ derleyicisinin kaynak kodunu denetlemekte kullanılır.
+Ön işlemci emirleri C++ programı içinde (#) işareti ile başlar.
+
+===== CHUNK 4 =====
+--- Page 7 ---
+Temel Veri Türleri ve Değişkenler
+Tamsayı Türleri
+int, short, long 
+Bellekte 2-4 bayt yer kaplar. 
+-32768 ile +32767 arası 
+değerler.
+Ondalıklı Türler
+float, double, long double -
+Ondalıklı sayılar için. 
+4-8 bayt bellek kullanımı.
+Karakter Türü
+char - Tek karakter saklar. ASCII 
+değerleri ile çalışır. 1 bayt bellek.
+Data 
+Types
+
+--- Page 9 ---
+Data 
+Types
+
+===== CHUNK 5 =====
+--- Page 9 ---
+Data 
+Types
+
+
+--- Page 10 ---
+Data 
+Types
+Değişken veri türü bildirimleri bir fonksiyonun içinde veya dışında
+yapılabilir. 
+• Yerel değişkenler
+• Global değişkenler
+• extern değişkenler
+• static değişkenler
+• auto değişkenler
+• register değişkenler
+
+--- Page 11 ---
+Data 
+Types
+Yerel değişkenler
+Fonksiyon içinde bildirimi yapılan bir değişken,
+sadece o fonksiyon için geçerlidir.
+
+===== CHUNK 6 =====
+--- Page 12 ---
+Data 
+Types
+Global değişkenler
+Eğer bir değişken program içinde tüm fonksiyonlar
+için geçerli olması söz konusu ise, bu
+kez fonksiyonların dışında bildirimi yapılır. 
+Bu tür değişkenlere küresel değişkenler
+(global variable) denir.
+
+===== CHUNK 7 =====
+--- Page 13 ---
+Data 
+Types
+Extern değişkenler
+Bir program dosyası içinde tanımlanan küresel değişkenlerin başka
+bir programda da geçerli olması istenebilir. Böyle değişkenlere extern değişkenler adı
+verilir.
+Register değişkenler
+Bazı uygulamalarda, değişkenlere çok daha hızlı erişmek için, register değişken
+tanımlanarak bellek alanları yerine makinanın hızlı bellek yazmaçları kullanılır. Ancak bu
+alanların miktarı sınırlıdır.
+
+===== CHUNK 8 =====
+--- Page 14 ---
+Data 
+Types
+Static değişkenler
+Bir değişken yerel değişken olarak tanımlanmış ise, 
+bu değişkenin yer aldığı fonksiyonun yürütülmesi
+sona erdiğinde değeri yok oluyordu. Bu durumu
+önleyerek, değişken değerinin sadece ilgili fonksiyon
+içinde değil de, tüm program boyunca geçerli olması
+sağlanabilir. Bu amaca ulaşmak için static değişkenler
+tanımlanır.
+static değişkenler, fonksiyonun yürütülmesi sonunda değerini kaybetmez, ancak diğer bir
+
+===== CHUNK 9 =====
+fonksiyon tarafından da kullanılamaz. Aynı fonksiyon yeniden yürütüldüğünde, daha önceki
+değerin kullanılmasını sağlar.
+
+===== CHUNK 10 =====
+--- Page 15 ---
+Data 
+Types
+Constant (Sabitler)
+Bir değişmez tanımlandıktan sonra, 
+programın herhangi bir yerinde değeri değiştirilemez.
+
+===== CHUNK 11 =====
+--- Page 16 ---
+İşleçler (Operatörler)
+Aritmetik İşleçler
++, -, *, /, % - Matematiksel işlemler için temel operatörler.
+Karşılaştırma İşleçleri
+>, <, >=, <=, ==, != - İki değeri karşılaştırma operatörleri.
+Mantıksal İşleçler
+&&, ||, ! - Koşulları birleştirme ve mantıksal işlemler.
+Atama İşleçleri
+=, +=, -=, *=, /= - Değer atama ve kısaltılmış işlemler.
+İşleçler (Operatörler)
+
+===== CHUNK 12 =====
+--- Page 17 ---
+Aritmetik İşleçler
+İşleçler (Operatörler)
+a tamsayısının 50, b tamsayısının 30 değerine sahip
+olduğunu varsayalım. Bunlardan a’ nın değerini 1
+arttırmak ve b’ nin değerini 1 azaltmak istiyoruz.
+
+
+--- Page 18 ---
+Aritmetik İşleçler
+İşleçler (Operatörler)
+
+
+--- Page 19 ---
+Karşılaştırma İşleçleri
+İşleçler (Operatörler)
+Girilen yazılı ortalamasını hesaplayarak ortalama 50′ den
+küçükse Kaldı, değilse Geçti
+
+===== CHUNK 13 =====
+--- Page 20 ---
+Mantıksal işleçler
+İşleçler (Operatörler)
+Klavye yardımıyla girilen iki sayısal değeri karşılaştırarak,
+durumlarına göre bir mesaj görüntülemek istiyoruz.
+Eğer iki sayısal değer pozitif ise “her iki sayi pozitif” biçiminde,
+en az biri negatif ise “sayilardan en az biri negatif”
+mesajı görüntülenecektir.
+
+
+--- Page 21 ---
+İşleçler (Operatörler)
+Girilen sayının Tek yada Çift olduğunu gösteren C++ programını yazınız.
+
+===== CHUNK 14 =====
+--- Page 22 ---
+İşleçler (Operatörler)
+Girilen sayının Tek yada Çift olduğunu gösteren C++ programını yazınız.
+
+
+--- Page 23 ---
+İşleçler (Operatörler)
+Girilen sayının 3′ e ve 5′ e tam bölünüp bölünmediğini gösteren
+C++ programını yazınız.
+
+--- Page 24 ---
+İşleçler (Operatörler)
+Girilen sayının 3′ e ve 5′ e tam bölünüp bölünmediğini gösteren
+C++ programını yazınız.
