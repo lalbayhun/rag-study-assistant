@@ -1,6 +1,29 @@
+# Virtual Environments
+venv/
+env/
 rag-env/
+
+# Python caches
 __pycache__/
 *.pyc
-.env
-*.pdf
+*.pyo
+*.pyd
+.Python
+*.py,cover
+
+# RAG specific (Veritabanı ve veri dosyaları)
 chroma_db/
+chunks_output.txt
+*.pdf
+*.log
+
+# IDEs (Editör ayarları)
+.vscode/
+.idea/
+*.sw?
+
+# Environment variables (Şifreler ve ortam değişkenleri)
+.env
+.env.*
+!.env.example
+```eof
