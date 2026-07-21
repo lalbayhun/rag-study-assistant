@@ -7,14 +7,14 @@ Bu script:
 4. Sonucu kontrol edebilmen için bir .txt dosyasına yazar
 """
 
-from pypdf import PdfReader
+from pypdf import PdfReader  
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
 def read_pdf(pdf_path: str) -> str:
     """PDF'i okur ve tüm sayfaların metnini birleştirip döndürür."""
-    reader = PdfReader(pdf_path)
-    full_text = ""
+    reader = PdfReader(pdf_path)       # PdfReader nesnesi oluşturduk, pdf_path'de belirtilen dosyayı oluşturuyor.
+    full_text = ""                     # çıkardığımız metinler buna eklenir
 
     for page_number, page in enumerate(reader.pages, start=1):
         text = page.extract_text()
@@ -41,7 +41,7 @@ def split_text_into_chunks(text: str, chunk_size: int = 500, chunk_overlap: int 
     return splitter.split_text(text)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": #ana program olan dosya direkt çalıştırılıyorsa
     pdf_file = "OOPI_1.pdf"
 
     print("PDF okunuyor...")
