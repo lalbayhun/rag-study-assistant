@@ -94,13 +94,25 @@ embedding_model = load_embedding_model()
 collection = load_db_client()
 
 # --- YARDIMCI FONKSİYONLAR ---
+#Çok dilli SEO promptu, Sıfır sıcaklık determinizmi, Hibrit Query Expansion ve temizlik katmani
 def reformulate_query(query: str, model: str = "qwen2.5:7b") -> str:
-    prompt = f"""Lütfen aşağıdaki sorudaki Türkçe yazım hatalarını düzelt.
-Eğer bir hata yoksa soruyu aynen bırak. 
-Cevap olarak sadece düzeltilmiş soruyu ver, hiçbir ek açıklama yapma.
+    """
+    Kullanıcı girdisini analiz eder:
+    - Yazım hatalarını düzeltir.
+    - Türkçe ve İngilizce akademik terimleri hibrit olarak genişleterek 
+      (Query Expansion) veritabanı arama başarısını (recall) maksimize eder.
+    """
+    prompt = f"""You are an advanced bilingual academic search engine optimization (SEO) assistant. 
+Your task is to take the user's question and expand it with both Turkish and English academic equivalents so it can match lecture notes in either language.
+For example:
+- If the user asks "tümevarım nedir", you should output: "tümevarım induction proof by induction"
+- If the user asks "path nedir", you should output: "path yol graph"
 
-Orijinal Soru: {query}
-Düzeltilmiş Soru:"""
+Output ONLY the expanded search query. Do NOT add any extra explanation, quotation marks, or conversational filler.
+
+Original Question: {query}
+Expanded Query:"""
+    
     try:
         response = ollama.chat(
             model=model,
@@ -108,11 +120,14 @@ Düzeltilmiş Soru:"""
             options={"temperature": 0.0},
         )
         rephrased = response["message"]["content"].strip()
-        rephrased = rephrased.replace("Düzeltilmiş Soru:", "").replace("Düzeltilmiş hali:", "").strip()
+        
+        for prefix in ["Expanded Query:", "Enriched Query:", "Optimized Query:", "Düzeltilmiş Soru:"]:
+            rephrased = rephrased.replace(prefix, "")
+        rephrased = rephrased.replace('"', '').strip()
         return rephrased
     except Exception:
         return query
-
+    
 def retrieve_relevant_chunks(query: str, top_k: int = 5):
     query_embedding = embedding_model.encode([query]).tolist()
     try:
@@ -128,29 +143,25 @@ def build_prompt(query: str, context_chunks: list[str]) -> str:
     context_text = "\n\n".join(
         f"[Parca {i+1}]\n{chunk}" for i, chunk in enumerate(context_chunks)
     )
-    prompt = f"""You are a study assistant for a course. Below are numbered text excerpts 
-from lecture notes (in Turkish). Not all excerpts are necessarily relevant to the question.
+    
+    prompt = f"""You are a strict, no-nonsense academic assistant. Answer the user's question using ONLY the provided lecture note excerpts.
 
-Read the excerpts and follow exactly one of these two rules:
-
-RULE A - If at least one excerpt contains information relevant to the question:
-Answer the question in Turkish using only that information. 
-Do not add any extra remarks about whether the information was found or not.
-Do not mention "excerpt", "parça", or any numbering (like [Parça 1]) in your answer - 
-just write the answer as if you knew it directly, in plain natural Turkish.
-
-RULE B - If none of the excerpts contain information relevant to the question:
-Respond with exactly this sentence and nothing else: "Bu bilgi verilen notlarda bulunmuyor."
-
-Never combine both rules. Never write a real answer and then also say the information 
-was not found (or vice versa).
+CRITICAL RULES:
+1. ABSOLUTE LANGUAGE PURITY: Detect the language of the user's question and write your ENTIRE response strictly in that language (Turkish or English). Never mix languages, never output Chinese, and never add conversational filler.
+2. IF INFORMATION EXISTS: Write a direct, concise answer. At the very end of your answer, you MUST append the page citation using the exact format:
+   - For Turkish questions: "(Kaynak: Sayfa [sayfa_numarasi])"
+   - For English questions: "(Source: Page [page_number])"
+   (Note: Extract the actual page number from the excerpts, never output letters like "X").
+3. IF INFORMATION DOES NOT EXIST: If the answer is not in the excerpts, output ONLY the exact fallback sentence below, with NO page numbers:
+   - For Turkish: "Bu bilgi verilen notlarda bulunmuyor."
+   - For English: "This information is not available in the provided notes."
 
 Excerpts:
 {context_text}
 
 Question: {query}
 
-Answer in Turkish:
+Answer:
 """
     return prompt
 

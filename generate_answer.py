@@ -126,8 +126,6 @@ if __name__ == "__main__":
         
         if DEBUG and clean_question.lower() != user_question.lower():
             print(f"[DEBUG] Soru duzeltildi: '{clean_question}'")
-        else:
-            clean_question = user_question # Eger model duzeltemezse orijinaline don
 
         # DEGISTIRILEN KISIM: Artik 'user_question' yerine 'clean_question' gonderiyoruz
         # Retrieval: en alakali chunk'lari bul
